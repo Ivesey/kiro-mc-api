@@ -1,0 +1,509 @@
+{
+  "pbtResults": {
+    "2.3 Write property test for request model constraint equivalence": {
+      "status": "passed",
+      "lastRunTimestamp": 1784891415208
+    },
+    "8.4 Write property test for update-then-retrieve round-trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892341083
+    },
+    "8.5 Write property test for non-existent ID yields 404": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892462684
+    },
+    "8.1 Write property test for create-then-retrieve round-trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892544279
+    },
+    "8.2 Write property test for validation rejection without DAL invocation": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892580015
+    },
+    "8.3 Write property test for get-all completeness invariant": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892602133
+    },
+    "8.8 Write property test for error responses use JSON content-type": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892893153
+    },
+    "8.6 Write property test for delete-then-retrieve yields 404": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892893922
+    },
+    "8.7 Write property test for error sanitization": {
+      "status": "passed",
+      "lastRunTimestamp": 1784892911939
+    }
+  },
+  "executionHistory": {
+    "1.1 Update requirements.txt with FastAPI ecosystem packages": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890711558
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890725299
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891215501
+      }
+    ],
+    "1.2 Create app/config.py with AppSettings": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890712931
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890726237
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891216193
+      }
+    ],
+    "1.3 Create app/dependencies.py with DAL registry and get_dal provider": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890713271
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891226873
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891474745
+      }
+    ],
+    "2.1 Create app/models/requests.py with CreateCaseRequest and UpdateCaseRequest": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890713446
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890727115
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891217405
+      }
+    ],
+    "2.2 Create app/models/errors.py with ErrorResponse model": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890713622
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890727969
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891217995
+      }
+    ],
+    "2.3 Write property test for request model constraint equivalence": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890713784
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891227824
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891476016
+      }
+    ],
+    "2.4 Write unit tests for request and error models": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890713929
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891228501
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891476804
+      }
+    ],
+    "3.1 Create app/routers/__init__.py": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714099
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890728600
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891218693
+      }
+    ],
+    "3.2 Create app/routers/cases.py with all CRUD endpoint handlers": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714223
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891485503
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891673404
+      }
+    ],
+    "3.3 Create app/main.py with FastAPI instance and router registration": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714355
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891486328
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891674367
+      }
+    ],
+    "4. Checkpoint - Ensure core application starts": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714498
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891796360
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892023116
+      }
+    ],
+    "5.1 Create tests/test_config.py": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714668
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891689516
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891779581
+      }
+    ],
+    "5.2 Create tests/test_main.py": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890714857
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891690040
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891780398
+      }
+    ],
+    "6.1 Create tests/routers/__init__.py": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715033
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891690860
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891781326
+      }
+    ],
+    "6.2 Create tests/routers/test_cases.py with example-based endpoint tests": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715197
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891797102
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892022448
+      }
+    ],
+    "7. Checkpoint - Ensure all unit tests pass": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715342
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892936524
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784893043395
+      }
+    ],
+    "8.1 Write property test for create-then-retrieve round-trip": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715523
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892027960
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892618883
+      }
+    ],
+    "8.2 Write property test for validation rejection without DAL invocation": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715677
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892028772
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892619292
+      }
+    ],
+    "8.3 Write property test for get-all completeness invariant": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715833
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892029608
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892620164
+      }
+    ],
+    "8.4 Write property test for update-then-retrieve round-trip": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890715976
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892030340
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892620795
+      }
+    ],
+    "8.5 Write property test for non-existent ID yields 404": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890716128
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892031303
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892621614
+      }
+    ],
+    "8.6 Write property test for delete-then-retrieve yields 404": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890716316
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892625929
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892925711
+      }
+    ],
+    "8.7 Write property test for error sanitization": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890716478
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892626367
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892926505
+      }
+    ],
+    "8.8 Write property test for error responses use JSON content-type": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890716645
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892627164
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892927279
+      }
+    ],
+    "9. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784890716794
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784893047763
+      },
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784893135232
+      }
+    ],
+    "1. Set up dependencies and configuration": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891474914
+      }
+    ],
+    "2. Create request and error models": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891477245
+      }
+    ],
+    "3. Implement router and application entry point": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891674834
+      }
+    ],
+    "5. Write unit tests for configuration and application bootstrap": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784891780646
+      }
+    ],
+    "6. Write unit tests for router endpoints": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892022637
+      }
+    ],
+    "8. Write property-based tests for router endpoints": [
+      {
+        "executionId": "ee0a5863-f431-473c-8688-7360a5a57f04",
+        "chatSessionId": "sess_84543b8e-036e-483b-88f3-a2dfa041c127",
+        "timestamp": 1784892927676
+      }
+    ]
+  }
+}
