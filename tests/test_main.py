@@ -16,7 +16,7 @@ class TestAppInstance:
         assert app is not None
 
     def test_app_title(self):
-        assert app.title == "Case API"
+        assert app.title == "MicroDigitech Support Cases API"
 
     def test_app_version(self):
         assert app.version == "1.0.0"

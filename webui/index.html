@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases Web UI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Support Cases</h1>
+    </header>
+
+    <main>
+        <!-- Connectivity error banner -->
+        <div id="connectivity-error" class="connectivity-error" role="alert" hidden>
+            <p id="connectivity-error-message">Unable to reach the API.</p>
+            <button id="retry-button" type="button">Retry</button>
+        </div>
+
+        <!-- ARIA live region for announcements -->
+        <div id="announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+        <!-- Message/notification area -->
+        <div id="message-area" class="message-area" role="status" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- Settings section -->
+        <section id="settings-section" aria-labelledby="settings-heading">
+            <h2 id="settings-heading">Settings</h2>
+            <div class="form-group">
+                <label for="api-url-input">API Base URL</label>
+                <input
+                    type="url"
+                    id="api-url-input"
+                    name="api-url"
+                    placeholder="http://localhost:8000"
+                    maxlength="2048"
+                    autocomplete="url"
+                >
+                <span id="api-url-error" class="field-error" role="alert"></span>
+            </div>
+            <button id="save-url-button" type="button">Save URL</button>
+        </section>
+
+        <!-- Case list section -->
+        <section id="case-list-section" aria-labelledby="case-list-heading" tabindex="-1">
+            <h2 id="case-list-heading">Cases</h2>
+            <div class="case-list-actions">
+                <button id="refresh-button" type="button">Refresh</button>
+                <button id="new-case-button" type="button">New Case</button>
+            </div>
+
+            <!-- Loading indicator -->
+            <div id="loading-indicator" class="loading-indicator" role="status" aria-live="polite" hidden>
+                <span>Loading...</span>
+            </div>
+
+            <!-- Empty state message -->
+            <p id="empty-state" hidden>No cases found.</p>
+
+            <!-- Case list container -->
+            <div id="case-list" role="list" aria-label="Support cases"></div>
+        </section>
+
+        <!-- Create/Edit form section -->
+        <section id="case-form-section" aria-labelledby="case-form-heading" hidden>
+            <h2 id="case-form-heading">Create Case</h2>
+            <form id="case-form" novalidate>
+                <input type="hidden" id="case-id-field" name="case_id" value="">
+
+                <div class="form-group">
+                    <label for="email-input">Email <span class="required-indicator" aria-hidden="true">*</span></label>
+                    <input
+                        type="email"
+                        id="email-input"
+                        name="email"
+                        required
+                        maxlength="254"
+                        autocomplete="email"
+                        aria-required="true"
+                        aria-describedby="email-error"
+                    >
+                    <span id="email-error" class="field-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue-input">Issue <span class="required-indicator" aria-hidden="true">*</span></label>
+                    <textarea
+                        id="issue-input"
+                        name="issue"
+                        required
+                        maxlength="2000"
+                        rows="4"
+                        aria-required="true"
+                        aria-describedby="issue-error"
+                    ></textarea>
+                    <span id="issue-error" class="field-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="severity-input">Severity <span class="required-indicator" aria-hidden="true">*</span></label>
+                    <select
+                        id="severity-input"
+                        name="severity"
+                        required
+                        aria-required="true"
+                        aria-describedby="severity-error"
+                    >
+                        <option value="">-- Select severity --</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                    <span id="severity-error" class="field-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="response-input">Response</label>
+                    <textarea
+                        id="response-input"
+                        name="response"
+                        maxlength="5000"
+                        rows="4"
+                        aria-describedby="response-error"
+                    ></textarea>
+                    <span id="response-error" class="field-error" role="alert"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button id="submit-case-button" type="submit">Create Case</button>
+                    <button id="cancel-button" type="button">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/validation.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

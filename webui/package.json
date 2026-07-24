@@ -1,0 +1,11 @@
+{
+  "name": "cases-webui-tests",
+  "private": true,
+  "description": "Property-based tests for Cases Web UI validation functions",
+  "scripts": {
+    "test": "node --test tests/validation.test.js tests/api.test.js tests/ui.test.js tests/app.test.js"
+  },
+  "devDependencies": {
+    "fast-check": "3.22.0"
+  }
+}
