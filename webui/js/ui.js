@@ -5,8 +5,23 @@
  */
 
 /**
+ * Determines whether a column should be visible based on AppConfig.columnVisibility.
+ * Returns true (show column) unless the config explicitly sets the column to false.
+ * Handles missing AppConfig, missing columnVisibility, missing keys, and non-boolean values.
+ * @param {string} columnId - The column identifier to check
+ * @returns {boolean} Whether the column should be visible
+ */
+function isColumnVisible(columnId) {
+  if (typeof AppConfig === 'undefined' || !AppConfig) return true;
+  if (!AppConfig.columnVisibility) return true;
+  var value = AppConfig.columnVisibility[columnId];
+  if (typeof value !== 'boolean') return true;
+  return value;
+}
+
+/**
  * Renders the case list into #case-list.
- * Creates one div[role="listitem"] per case with case details and action buttons.
+ * Creates a table with thead/tbody containing one tr per case with td cells and action buttons.
  * Hides the empty state and shows the list.
  * @param {Array} cases - Array of case objects
  */
@@ -26,58 +41,90 @@ function renderCaseList(cases) {
   emptyState.hidden = true;
   caseList.hidden = false;
 
-  cases.forEach(function (caseItem) {
-    var item = document.createElement('div');
-    item.setAttribute('role', 'listitem');
-    item.className = 'case-item';
+  // Column definitions array
+  var columns = [
+    { id: 'caseId', header: 'Case ID', render: function(caseItem) {
+      var td = document.createElement('td');
+      td.textContent = caseItem.case_id;
+      return td;
+    }},
+    { id: 'email', header: 'Email', render: function(caseItem) {
+      var td = document.createElement('td');
+      td.textContent = caseItem.email;
+      return td;
+    }},
+    { id: 'issue', header: 'Issue', render: function(caseItem) {
+      var td = document.createElement('td');
+      td.className = 'case-issue';
+      td.textContent = truncateText(caseItem.issue || '', 50);
+      return td;
+    }},
+    { id: 'severity', header: 'Severity', render: function(caseItem) {
+      var td = document.createElement('td');
+      var severityBadge = document.createElement('span');
+      severityBadge.className = 'severity-badge severity-badge--' + caseItem.severity;
+      severityBadge.textContent = caseItem.severity;
+      td.appendChild(severityBadge);
+      return td;
+    }},
+    { id: 'response', header: 'Response', render: function(caseItem) {
+      var td = document.createElement('td');
+      td.className = 'case-response';
+      td.textContent = truncateText(caseItem.response || '', 50);
+      return td;
+    }},
+    { id: 'actions', header: 'Actions', render: function(caseItem) {
+      var td = document.createElement('td');
+      td.className = 'actions';
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'edit-button';
+      editBtn.textContent = 'Edit';
+      editBtn.setAttribute('data-case-id', caseItem.case_id);
+      var deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.setAttribute('data-case-id', caseItem.case_id);
+      td.appendChild(editBtn);
+      td.appendChild(deleteBtn);
+      return td;
+    }}
+  ];
 
-    var caseId = document.createElement('span');
-    caseId.className = 'case-id';
-    caseId.textContent = caseItem.case_id;
-
-    var email = document.createElement('span');
-    email.className = 'case-email';
-    email.textContent = caseItem.email;
-
-    var issue = document.createElement('span');
-    issue.className = 'case-issue';
-    issue.textContent = truncateText(caseItem.issue || '', 50);
-
-    var severityBadge = document.createElement('span');
-    severityBadge.className = 'severity-badge severity-' + caseItem.severity;
-    severityBadge.textContent = caseItem.severity;
-
-    var response = document.createElement('span');
-    response.className = 'case-response';
-    response.textContent = truncateText(caseItem.response || '', 50);
-
-    var actions = document.createElement('span');
-    actions.className = 'case-actions';
-
-    var editBtn = document.createElement('button');
-    editBtn.type = 'button';
-    editBtn.className = 'edit-button';
-    editBtn.textContent = 'Edit';
-    editBtn.setAttribute('data-case-id', caseItem.case_id);
-
-    var deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.className = 'delete-button';
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.setAttribute('data-case-id', caseItem.case_id);
-
-    actions.appendChild(editBtn);
-    actions.appendChild(deleteBtn);
-
-    item.appendChild(caseId);
-    item.appendChild(email);
-    item.appendChild(issue);
-    item.appendChild(severityBadge);
-    item.appendChild(response);
-    item.appendChild(actions);
-
-    caseList.appendChild(item);
+  // Filter columns by visibility configuration
+  var visibleColumns = columns.filter(function(col) {
+    return isColumnVisible(col.id);
   });
+
+  // Create table structure
+  var table = document.createElement('table');
+  table.className = 'case-list';
+
+  // Create thead with column headers
+  var thead = document.createElement('thead');
+  var headerRow = document.createElement('tr');
+  visibleColumns.forEach(function(col) {
+    var th = document.createElement('th');
+    th.textContent = col.header;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Create tbody with case rows
+  var tbody = document.createElement('tbody');
+
+  cases.forEach(function(caseItem) {
+    var row = document.createElement('tr');
+    visibleColumns.forEach(function(col) {
+      row.appendChild(col.render(caseItem));
+    });
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  caseList.appendChild(table);
 }
 
 /**
@@ -304,6 +351,7 @@ if (typeof module !== 'undefined' && module.exports) {
     setDeleteDisabled: setDeleteDisabled,
     showConnectivityError: showConnectivityError,
     hideConnectivityError: hideConnectivityError,
-    showValidationErrors: showValidationErrors
+    showValidationErrors: showValidationErrors,
+    isColumnVisible: isColumnVisible
   };
 }

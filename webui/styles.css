@@ -320,6 +320,10 @@ button:disabled,
   gap: 1rem;
 }
 
+.connectivity-error[hidden] {
+  display: none;
+}
+
 .connectivity-error button {
   background-color: #c92a2a;
   color: #fff;
@@ -419,4 +423,14 @@ a:focus,
   .settings-panel input[type="url"] {
     max-width: 100%;
   }
+}
+
+/* Logo */
+img.logo {
+  padding: 10px;
+  background-color: black;
+  display: block;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }

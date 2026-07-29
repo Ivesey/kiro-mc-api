@@ -8,7 +8,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 from app.config import AppSettings, get_settings
-from app.dependencies import DAL_REGISTRY, get_dal
+from app.dependencies import DAL_REGISTRY, get_dal, _reset_dal
 from app.dal.case_dal import CaseDAL
 
 
@@ -28,6 +28,14 @@ class TestAppSettings:
 
 class TestGetDal:
     """Tests for the get_dal provider function."""
+
+    def setup_method(self):
+        """Reset the DAL singleton before each test."""
+        _reset_dal()
+
+    def teardown_method(self):
+        """Reset the DAL singleton after each test."""
+        _reset_dal()
 
     def test_invalid_dal_name_raises_value_error(self):
         """Requirement 2.5: unrecognized DAL name raises ValueError."""

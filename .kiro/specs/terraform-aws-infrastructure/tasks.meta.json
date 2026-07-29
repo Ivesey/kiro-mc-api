@@ -1,0 +1,265 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create the directory structure and provider configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729078
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328738235
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328982834
+      }
+    ],
+    "1.2 Create root-level variables and backend configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729221
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328990648
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329056184
+      }
+    ],
+    "2.1 Create the storage module configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729356
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329060949
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329319932
+      }
+    ],
+    "3.1 Create the CDN module configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729580
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329325984
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329436148
+      }
+    ],
+    "4.1 Create the compute module configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729778
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329061719
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329320666
+      }
+    ],
+    "5.1 Create the networking module configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328729910
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329062549
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329321515
+      }
+    ],
+    "6. Checkpoint - Validate module structure": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730041
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330031782
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330220648
+      }
+    ],
+    "7.1 Wire all modules together in the root main.tf": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730174
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329441076
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329697167
+      }
+    ],
+    "7.2 Create root-level outputs": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730287
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329702829
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329759004
+      }
+    ],
+    "8.1 Create tfvars files for each environment": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730417
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329441709
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329698410
+      }
+    ],
+    "9.1 Create a deployment package build script": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730543
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329767680
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330024060
+      }
+    ],
+    "10. Final checkpoint - Full validation": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785328730655
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330224866
+      },
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330343179
+      }
+    ],
+    "1. Set up Terraform directory structure and provider configuration": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329056341
+      }
+    ],
+    "2. Implement the storage module (S3 static website bucket)": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329320209
+      }
+    ],
+    "4. Implement the compute module (Lambda function + IAM)": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329320959
+      }
+    ],
+    "5. Implement the networking module (API Gateway)": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329321654
+      }
+    ],
+    "3. Implement the CDN module (CloudFront distribution)": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329436337
+      }
+    ],
+    "8. Create environment-specific variable files": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329698664
+      }
+    ],
+    "7. Compose modules in root main.tf and create outputs": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785329759281
+      }
+    ],
+    "9. Create Lambda deployment packaging script": [
+      {
+        "executionId": "c9bfa5c7-af47-4f49-a498-8bfa5d3137b3",
+        "chatSessionId": "sess_ef90db21-d33b-43fc-96b5-09e411294e1d",
+        "timestamp": 1785330024213
+      }
+    ]
+  }
+}

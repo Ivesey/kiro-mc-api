@@ -1,0 +1,162 @@
+{
+  "pbtResults": {
+    "1. Write bug condition exploration test": {
+      "status": "passed",
+      "failingExample": "Counterexample: [{\"case_id\":\"00000000-0000-0000-0000-000000000000\",\"email\":\"a@a.com\",\"issue\":\" \",\"severity\":\"low\",\"response\":\"\"}]\nShrunk 39 time(s)\nGot AssertionError: Expected #case-list to contain a <table> element, but no table found. Found children with tags: [DIV]\n\nBug confirmed: renderCaseList creates div[role=\"listitem\"] elements with span children instead of table > thead/tbody > tr > td elements. Severity badge class is \"severity-badge severity-low\" (single dash) instead of \"severity-badge severity-badge--low\" (BEM double-dash).",
+      "lastRunTimestamp": 1785259972805
+    },
+    "2. Write preservation property tests (BEFORE implementing fix)": {
+      "status": "passed",
+      "lastRunTimestamp": 1785266099899
+    },
+    "3.4 Verify bug condition exploration test now passes": {
+      "status": "passed",
+      "lastRunTimestamp": 1785266292472
+    }
+  },
+  "executionHistory": {
+    "1. Write bug condition exploration test": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259770403
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259794304
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259987559
+      }
+    ],
+    "2. Write preservation property tests (BEFORE implementing fix)": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259770591
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259994940
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266115599
+      }
+    ],
+    "3.1 Rewrite `renderCaseList` to use table elements": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259770772
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266123517
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266216205
+      }
+    ],
+    "3.2 Fix severity badge class to use BEM double-dash modifier": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259770953
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266223968
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266233343
+      }
+    ],
+    "3.3 Preserve Edit/Delete buttons with data-case-id and truncateText usage": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259771293
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266248420
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266252700
+      }
+    ],
+    "3.4 Verify bug condition exploration test now passes": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259771540
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266259607
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266302434
+      }
+    ],
+    "3.5 Verify preservation tests still pass": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259771866
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266307195
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266342164
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785259772023
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266347725
+      },
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266381121
+      }
+    ],
+    "3. Fix for case list table rendering and severity badge classes": [
+      {
+        "executionId": "b98545d7-e9b6-4777-9e3f-d7634795712e",
+        "chatSessionId": "sess_3abfb271-9d6c-44ed-a0a2-647cd3faf440",
+        "timestamp": 1785266342326
+      }
+    ]
+  }
+}

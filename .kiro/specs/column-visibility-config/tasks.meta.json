@@ -1,0 +1,275 @@
+{
+  "pbtResults": {
+    "2.5 Write property test: Row cell count matches header count": {
+      "status": "passed",
+      "lastRunTimestamp": 1785322565006
+    },
+    "2.3 Write property test: Visible column count matches configuration": {
+      "status": "passed",
+      "lastRunTimestamp": 1785322648304
+    },
+    "2.4 Write property test: Hidden columns produce no cells": {
+      "status": "passed",
+      "lastRunTimestamp": 1785322690053
+    },
+    "4.3 Write property test: Unknown keys are ignored": {
+      "status": "passed",
+      "lastRunTimestamp": 1785323011904
+    },
+    "4.2 Write property test: Missing or invalid config defaults to all-visible": {
+      "status": "passed",
+      "lastRunTimestamp": 1785323012633
+    }
+  },
+  "executionHistory": {
+    "1.1 Create `webui/js/config.js` with the `AppConfig` global object": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801051
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320816426
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320861624
+      }
+    ],
+    "1.2 Add `config.js` script tag to `webui/index.html` before all other application scripts": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801193
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320817702
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320862523
+      }
+    ],
+    "2.1 Add `isColumnVisible` helper function to `webui/js/ui.js`": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801349
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320870002
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321083712
+      }
+    ],
+    "2.2 Refactor `renderCaseList` in `webui/js/ui.js` to use column definitions array": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801478
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321107314
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321943577
+      }
+    ],
+    "2.3 Write property test: Visible column count matches configuration": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801699
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321951154
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322702117
+      }
+    ],
+    "2.4 Write property test: Hidden columns produce no cells": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801836
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321951835
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322702720
+      }
+    ],
+    "2.5 Write property test: Row cell count matches header count": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320801968
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321952720
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322703426
+      }
+    ],
+    "3. Checkpoint": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802111
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323035423
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323366869
+      }
+    ],
+    "4.1 Write unit tests for default and invalid configuration scenarios": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802240
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785321953548
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322704409
+      }
+    ],
+    "4.2 Write property test: Missing or invalid config defaults to all-visible": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802411
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322713671
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323025917
+      }
+    ],
+    "4.3 Write property test: Unknown keys are ignored": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802582
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322714569
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323026698
+      }
+    ],
+    "5.1 Write unit tests for end-to-end rendering scenarios": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802718
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322715401
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323027786
+      }
+    ],
+    "6. Final checkpoint": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320802891
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323374483
+      },
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323473324
+      }
+    ],
+    "1. Create configuration file and update script loading": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785320862703
+      }
+    ],
+    "2. Implement column visibility logic in `ui.js`": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785322703807
+      }
+    ],
+    "4. Implement default and error handling behavior": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323026934
+      }
+    ],
+    "5. Integration wiring and final verification": [
+      {
+        "executionId": "3fe0482f-9bc9-49c1-8b22-be4635a14820",
+        "chatSessionId": "sess_14df4458-bfa0-44fd-b16b-97a6e8cfcda6",
+        "timestamp": 1785323027915
+      }
+    ]
+  }
+}
