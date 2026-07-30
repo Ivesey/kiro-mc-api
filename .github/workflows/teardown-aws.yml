@@ -49,6 +49,11 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Create placeholder Lambda package
+        run: |
+          mkdir -p dist
+          echo "placeholder" | zip dist/lambda.zip -
+
       - name: Destroy infrastructure
         working-directory: terraform/aws
         run: |
