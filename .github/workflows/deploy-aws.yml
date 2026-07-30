@@ -5,7 +5,6 @@
 # Required GitHub Secrets:
 #   - AWS_ROLE_ARN: IAM role ARN for OIDC authentication (e.g. arn:aws:iam::123456789012:role/github-actions)
 #   - TF_STATE_BUCKET: S3 bucket name for Terraform remote state
-#   - TF_STATE_DYNAMODB_TABLE: DynamoDB table name for Terraform state locking
 #
 # Required GitHub Variables (optional):
 #   - AWS_REGION: AWS region to deploy to (defaults to us-east-1 if not set)
@@ -68,7 +67,7 @@ jobs:
         run: |
           terraform init \
             -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
-            -backend-config="dynamodb_table=${{ secrets.TF_STATE_DYNAMODB_TABLE }}" \
+            -backend-config="use_lockfile=true" \
             -backend-config="key=${{ github.event.inputs.environment }}/terraform.tfstate" \
             -backend-config="region=${{ vars.AWS_REGION || 'us-east-1' }}"
 

@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "webui" {
-  bucket = "${var.environment}-${var.project_name}-webui"
+  bucket        = "${var.environment}-${var.project_name}-webui"
+  force_destroy = true
 
   tags = var.tags
 }
