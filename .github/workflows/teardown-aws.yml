@@ -1,0 +1,82 @@
+# Teardown Infrastructure Workflow
+#
+# This workflow destroys AWS infrastructure provisioned by Terraform.
+# It supports tearing down a single environment or all three (dev, staging, prod) in sequence.
+#
+# Required GitHub Secrets:
+#   - AWS_ROLE_ARN: IAM role ARN for OIDC authentication
+#   - TF_STATE_BUCKET: S3 bucket name for Terraform remote state
+#   - TF_STATE_DYNAMODB_TABLE: DynamoDB table name for Terraform state locking
+#
+# Required GitHub Variables (optional):
+#   - AWS_REGION: AWS region (defaults to us-east-1 if not set)
+
+name: Teardown AWS Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment to destroy"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - dev
+          - staging
+          - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  teardown:
+    name: Teardown ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Destroy infrastructure
+        working-directory: terraform/aws
+        run: |
+          set -e
+
+          if [ "${{ github.event.inputs.environment }}" == "all" ]; then
+            ENVIRONMENTS=("dev" "staging" "prod")
+          else
+            ENVIRONMENTS=("${{ github.event.inputs.environment }}")
+          fi
+
+          for env in "${ENVIRONMENTS[@]}"; do
+            echo "::group::Destroying ${env}"
+
+            terraform init -reconfigure \
+              -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
+              -backend-config="dynamodb_table=${{ secrets.TF_STATE_DYNAMODB_TABLE }}" \
+              -backend-config="key=${env}/terraform.tfstate" \
+              -backend-config="region=${{ vars.AWS_REGION || 'us-east-1' }}"
+
+            if ! terraform destroy -auto-approve \
+              -var="environment=${env}" \
+              -var-file="environments/${env}.tfvars"; then
+              echo "## :x: Teardown failed for environment: ${env}" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+
+            echo "::endgroup::"
+          done
+
+          echo "## :white_check_mark: All environments destroyed successfully" >> $GITHUB_STEP_SUMMARY

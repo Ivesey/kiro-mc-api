@@ -1,0 +1,80 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create `.github/workflows/teardown-aws.yml` with workflow_dispatch trigger and environment input": [
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408111705
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408119340
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408652669
+      }
+    ],
+    "1.2 Add checkout and AWS OIDC authentication steps": [
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408111992
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408656135
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408695112
+      }
+    ],
+    "1.3 Add Terraform setup and destroy loop step": [
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408112178
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408698690
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408795232
+      }
+    ],
+    "2. Final checkpoint": [
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408112351
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408799367
+      },
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785409481536
+      }
+    ],
+    "1. Create the teardown workflow file": [
+      {
+        "executionId": "201c4ad5-e5d8-4e26-8317-1aaec49778e4",
+        "chatSessionId": "sess_1ecec258-be05-40ad-874e-f060a7299621",
+        "timestamp": 1785408795411
+      }
+    ]
+  }
+}
