@@ -18,7 +18,7 @@
 #      Lambda, CloudFront, and any other resources Terraform manages.
 #   See: https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 
-name: Deploy Infrastructure
+name: Deploy AWS Infrastructure
 
 on:
   workflow_dispatch:
