@@ -59,7 +59,9 @@ module "compute" {
   timeout                 = var.lambda_timeout
   handler                 = "handler.handler"
   deployment_package_path = var.deployment_package_path
-  environment_variables   = var.app_environment_variables
+  environment_variables = merge(var.app_environment_variables, {
+    DYNAMODB_TABLE_NAME = module.compute.cases_table_name
+  })
   tags                    = local.common_tags
 }
 

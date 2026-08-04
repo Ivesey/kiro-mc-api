@@ -10,6 +10,7 @@ This is a Python 3 project.
 ## Python Environment
 
 - Always use the project virtual environment: `venv/`
+- venv is in the project root directory
 - Install dependencies from `requirements.txt`: `venv\Scripts\pip install -r requirements.txt`
 - Run tests using the venv pytest
 - Never install packages into the global Python environment — always activate the venv or use `venv\Scripts\pip` directly.

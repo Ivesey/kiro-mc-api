@@ -9,6 +9,13 @@ DAL_REGISTRY: dict[str, Type[CaseDAL]] = {
     "InMemoryCaseDAL": InMemoryCaseDAL,
 }
 
+# Conditionally register DynamoDBCaseDAL if the aws_dal package is available
+try:
+    from aws_dal.dynamodb_case_dal import DynamoDBCaseDAL
+    DAL_REGISTRY["DynamoDBCaseDAL"] = DynamoDBCaseDAL
+except (ImportError, AttributeError):
+    pass
+
 _dal_instance: CaseDAL | None = None
 
 

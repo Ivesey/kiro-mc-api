@@ -52,6 +52,41 @@ resource "aws_cloudwatch_log_group" "lambda" {
   tags = var.tags
 }
 
+# DynamoDB Table for support cases
+resource "aws_dynamodb_table" "cases" {
+  name         = "${var.environment}-${var.project_name}-cases"
+  billing_mode = "PAY_PER_REQUEST"
+
+  hash_key = "case_id"
+
+  attribute {
+    name = "case_id"
+    type = "S"
+  }
+
+  tags = var.tags
+}
+
+# IAM Role Policy - DynamoDB permissions for the cases table
+resource "aws_iam_role_policy" "lambda_dynamodb" {
+  name = "${local.role_name}-dynamodb"
+  role = aws_iam_role.lambda_execution.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "dynamodb:*"
+        Resource = [
+          aws_dynamodb_table.cases.arn,
+          "${aws_dynamodb_table.cases.arn}/index/*"
+        ]
+      }
+    ]
+  })
+}
+
 # Lambda Function
 resource "aws_lambda_function" "api" {
   function_name    = local.function_name
@@ -69,6 +104,7 @@ resource "aws_lambda_function" "api" {
 
   depends_on = [
     aws_iam_role_policy.lambda_logging,
+    aws_iam_role_policy.lambda_dynamodb,
     aws_cloudwatch_log_group.lambda
   ]
 

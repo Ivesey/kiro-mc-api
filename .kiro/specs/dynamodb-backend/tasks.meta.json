@@ -1,0 +1,318 @@
+{
+  "pbtResults": {
+    "6.4 Write property test for pagination completeness": {
+      "status": "passed",
+      "lastRunTimestamp": 1785500991438
+    },
+    "6.1 Write property test for create-then-retrieve round-trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1785501036324
+    },
+    "6.3 Write property test for non-existent ID operations": {
+      "status": "passed",
+      "lastRunTimestamp": 1785501173386
+    }
+  },
+  "executionHistory": {
+    "1.1 Add DynamoDB table resource and IAM policy to the compute module": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498244601
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498263789
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498749825
+      }
+    ],
+    "1.2 Add compute module outputs and root module wiring": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498244832
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498763124
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498884866
+      }
+    ],
+    "2.1 Add `dynamodb_table_name` field to AppSettings": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498244957
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498264856
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498750791
+      }
+    ],
+    "2.2 Add conditional DynamoDBCaseDAL import to dependencies.py": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245088
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498764148
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498885688
+      }
+    ],
+    "2.3 Write unit tests for conditional registration": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245202
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498913289
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500514994
+      }
+    ],
+    "3. Checkpoint - Validate infrastructure and registration": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245347
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502263686
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785509950163
+      }
+    ],
+    "4.1 Create `api/aws-dal/` package with `__init__.py` and `dynamodb_case_dal.py`": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245478
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498914905
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500515355
+      }
+    ],
+    "4.2 Implement `create_case` and `get_case_by_id`": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245606
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500524052
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500579343
+      }
+    ],
+    "4.3 Implement `update_case`, `delete_case`, and `get_all_cases`": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245724
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500587082
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500634327
+      }
+    ],
+    "4.4 Write unit tests for DynamoDBCaseDAL": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498245885
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500650884
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502252168
+      }
+    ],
+    "5. Checkpoint - Validate DAL implementation": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246016
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785509959336
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785510581899
+      }
+    ],
+    "6.1 Write property test for create-then-retrieve round-trip": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246131
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500651973
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502253027
+      }
+    ],
+    "6.2 Write property test for duplicate create rejection": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246269
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500652604
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502253693
+      }
+    ],
+    "6.3 Write property test for non-existent ID operations": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246393
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500653352
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502254694
+      }
+    ],
+    "6.4 Write property test for pagination completeness": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246528
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500653989
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502255212
+      }
+    ],
+    "7. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498246638
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785510586829
+      },
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785511452081
+      }
+    ],
+    "1. Terraform: DynamoDB table and IAM policy in compute module": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785498885040
+      }
+    ],
+    "2. AppSettings extension and conditional DAL registration": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785500515561
+      }
+    ],
+    "4. DynamoDBCaseDAL implementation": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502252548
+      }
+    ],
+    "6. Property-based tests for DynamoDBCaseDAL": [
+      {
+        "executionId": "78964c69-2e83-4eb0-9b87-8e884bcec302",
+        "chatSessionId": "sess_b28fda52-1742-454d-910e-1a2a9b60d314",
+        "timestamp": 1785502255349
+      }
+    ]
+  }
+}
