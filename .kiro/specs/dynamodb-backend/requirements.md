@@ -13,6 +13,7 @@ This feature adds DynamoDB as a persistent backend database for the support case
 - **DAL_Registry**: The dictionary in `api/app/dependencies.py` that maps string identifiers to CaseDAL subclass types.
 - **AppSettings**: The Pydantic BaseSettings class in `api/app/config.py` that controls which DAL implementation is active.
 - **AWS_DAL_Module**: The directory at `api/aws-dal/` containing the DynamoDB DAL implementation, kept separate from the core application code for modularity.
+- **Requirements_Files**: The three-tier dependency specification: `api/requirements.txt` (core runtime), `api/requirements-aws.txt` (AWS runtime, includes core), `api/requirements-dev.txt` (development and testing, includes AWS).
 
 ## Requirements
 
@@ -67,10 +68,11 @@ This feature adds DynamoDB as a persistent backend database for the support case
 1. WHEN the `aws_dal` package is importable at Python module level, THE DAL_Registry SHALL contain an entry mapping `"DynamoDBCaseDAL"` to the DynamoDB_DAL class from `aws_dal.dynamodb_case_dal`.
 2. WHEN the `aws_dal` package is not importable at Python module level, THE DAL_Registry SHALL not contain an entry for `"DynamoDBCaseDAL"` and the `dependencies` module SHALL load without raising an ImportError or any other exception.
 3. THE dependencies.py module SHALL use a conditional import (try/except ImportError) to attempt importing `aws_dal.dynamodb_case_dal` and register the DynamoDB_DAL class in DAL_REGISTRY only when the import succeeds.
-4. WHEN AppSettings.dal_implementation is set to `"DynamoDBCaseDAL"` and the `aws_dal` package is importable, THE get_dal function SHALL instantiate and return a DynamoDB_DAL instance that is a subclass of CaseDAL.
-5. WHEN AppSettings.dal_implementation is set to `"DynamoDBCaseDAL"` and the `aws_dal` package is not importable, THE get_dal function SHALL raise a ValueError with a message that includes the unrecognized implementation name and the list of currently registered implementations.
-6. IF the `aws_dal` package import fails, THEN THE DAL_Registry SHALL still contain the `"InMemoryCaseDAL"` entry and all previously registered implementations SHALL remain functional.
-7. IF the `aws_dal` package is importable but the `DynamoDBCaseDAL` class cannot be resolved from it, THEN THE dependencies module SHALL not add a `"DynamoDBCaseDAL"` entry to the DAL_Registry and SHALL NOT raise an unhandled exception during module load.
+4. THE `boto3` dependency SHALL be declared in `requirements-aws.txt` (not the core `requirements.txt`), ensuring that non-AWS deployments do not pull in AWS libraries.
+5. WHEN AppSettings.dal_implementation is set to `"DynamoDBCaseDAL"` and the `aws_dal` package is importable, THE get_dal function SHALL instantiate and return a DynamoDB_DAL instance that is a subclass of CaseDAL.
+6. WHEN AppSettings.dal_implementation is set to `"DynamoDBCaseDAL"` and the `aws_dal` package is not importable, THE get_dal function SHALL raise a ValueError with a message that includes the unrecognized implementation name and the list of currently registered implementations.
+7. IF the `aws_dal` package import fails, THEN THE DAL_Registry SHALL still contain the `"InMemoryCaseDAL"` entry and all previously registered implementations SHALL remain functional.
+8. IF the `aws_dal` package is importable but the `DynamoDBCaseDAL` class cannot be resolved from it, THEN THE dependencies module SHALL not add a `"DynamoDBCaseDAL"` entry to the DAL_Registry and SHALL NOT raise an unhandled exception during module load.
 
 ### Requirement 5: DynamoDB Table Name Configuration
 

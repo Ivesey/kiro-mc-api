@@ -24,7 +24,7 @@ MAX_ZIP_SIZE = 50 * 1024 * 1024
 # Resolve paths relative to the project root (parent of scripts/)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 API_DIR = PROJECT_ROOT / "api"
-REQUIREMENTS_FILE = API_DIR / "requirements.txt"
+REQUIREMENTS_FILE = API_DIR / "requirements-aws.txt"
 APP_SOURCE_DIR = API_DIR / "app"
 BUILD_DIR = PROJECT_ROOT / "build"
 DIST_DIR = PROJECT_ROOT / "dist"

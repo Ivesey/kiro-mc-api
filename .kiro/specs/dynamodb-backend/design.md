@@ -6,7 +6,7 @@ This feature adds DynamoDB as a persistent backend for the support cases API. It
 
 1. **Infrastructure**: A Terraform-managed DynamoDB table and IAM policy within the existing `compute` module.
 2. **Application**: A `DynamoDBCaseDAL` class that implements the `CaseDAL` abstract base class using boto3.
-3. **Modularity**: Conditional registration in `dependencies.py` so that the DynamoDB DAL is only loaded when the `aws_dal` package is present on the Python path.
+3. **Modularity**: Conditional registration in `dependencies.py` so that the DynamoDB DAL is only loaded when the `aws_dal` package is present on the Python path. AWS-specific dependencies (`boto3`) are isolated in `requirements-aws.txt`, keeping the core runtime free of AWS libraries.
 
 The design preserves the existing DAL abstraction — the router layer is unchanged and the in-memory DAL continues to work for local development and testing.
 
@@ -108,6 +108,8 @@ class DynamoDBCaseDAL(CaseDAL):
 | `delete_case` | `delete_item` | `attribute_exists(case_id)` — raises KeyError if missing |
 | `get_case_by_id` | `get_item` | Check response for `Item` key — raise KeyError if absent |
 | `get_all_cases` | `scan` (paginated) | Loop on `LastEvaluatedKey` until exhausted |
+
+**Dependency management:** The `boto3` dependency is declared in `api/requirements-aws.txt` (not the core `requirements.txt`), ensuring non-AWS deployments don't pull in AWS libraries. Test-only dependencies (`moto`, `hypothesis`, `pytest`, `httpx`) are in `api/requirements-dev.txt`. The Lambda build script uses `requirements-aws.txt` to produce a deployment package with core + AWS deps only.
 
 ### 3. Conditional Registration
 
@@ -232,7 +234,9 @@ except ClientError as e:
 The project already uses Hypothesis for property-based testing of the `InMemoryCaseDAL`. The same property tests will be extended to cover `DynamoDBCaseDAL` using a mocked boto3 DynamoDB resource (via `moto` or `unittest.mock`).
 
 **Configuration:**
-- Library: `hypothesis==6.112.2` (already in requirements.txt)
+- Library: `hypothesis==6.112.2` (in `requirements-dev.txt`)
+- DynamoDB mocking: `moto==5.0.22` (in `requirements-dev.txt`)
+- AWS SDK: `boto3==1.35.36` (in `requirements-aws.txt`)
 - Minimum iterations: 100 per property (`@settings(max_examples=100)`)
 - Mocking: `moto` library for local DynamoDB simulation, or `unittest.mock.patch` for boto3 table methods
 

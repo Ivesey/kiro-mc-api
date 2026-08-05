@@ -108,6 +108,7 @@ This plan implements DynamoDB as a persistent backend for the support cases API 
 - The `api/aws-dal/` directory is a sibling package to `app/` — it must be on `sys.path` when deployed (included in the Lambda ZIP) but is absent in local dev
 - Infrastructure tasks (Terraform) have no automated test runner here — validate with `terraform validate` and `terraform plan`
 - `moto` library provides a local DynamoDB mock suitable for both unit and property tests
+- Dependencies are split into three tiers: `requirements.txt` (core runtime), `requirements-aws.txt` (AWS runtime + core), `requirements-dev.txt` (test/dev + AWS + core). The Lambda build uses `requirements-aws.txt`; local development uses `requirements-dev.txt`.
 
 ## Task Dependency Graph
 
