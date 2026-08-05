@@ -1,35 +1,48 @@
-from typing import Type
+import importlib
+import os
 
 from app.dal.case_dal import CaseDAL
-from app.dal.in_memory_case_dal import InMemoryCaseDAL
-from app.config import get_settings
-
-# Registry: string identifier → concrete CaseDAL subclass
-DAL_REGISTRY: dict[str, Type[CaseDAL]] = {
-    "InMemoryCaseDAL": InMemoryCaseDAL,
-}
-
-# Conditionally register DynamoDBCaseDAL if the aws_dal package is available
-try:
-    from aws_dal.dynamodb_case_dal import DynamoDBCaseDAL
-    DAL_REGISTRY["DynamoDBCaseDAL"] = DynamoDBCaseDAL
-except (ImportError, AttributeError):
-    pass
 
 _dal_instance: CaseDAL | None = None
 
+_DEFAULT_DAL = "app.dal.in_memory_case_dal.InMemoryCaseDAL"
+
+
+def _import_dal_class(dotted_path: str) -> type[CaseDAL]:
+    """Import a CaseDAL subclass from a fully-qualified dotted path."""
+    try:
+        module_path, class_name = dotted_path.rsplit(".", 1)
+    except ValueError:
+        raise ValueError(
+            f"DAL_IMPLEMENTATION must be a dotted path (e.g. 'app.dal.in_memory_case_dal.InMemoryCaseDAL'), "
+            f"got: '{dotted_path}'"
+        )
+    try:
+        module = importlib.import_module(module_path)
+    except ImportError as e:
+        raise ValueError(
+            f"Could not import DAL module '{module_path}': {e}"
+        ) from e
+    try:
+        dal_class = getattr(module, class_name)
+    except AttributeError:
+        raise ValueError(
+            f"Module '{module_path}' has no class '{class_name}'"
+        )
+    if not (isinstance(dal_class, type) and issubclass(dal_class, CaseDAL)):
+        raise ValueError(
+            f"'{dotted_path}' is not a CaseDAL subclass"
+        )
+    return dal_class
+
 
 def get_dal() -> CaseDAL:
+    """Return the singleton CaseDAL instance, importing it based on DAL_IMPLEMENTATION env var."""
     global _dal_instance
     if _dal_instance is None:
-        settings = get_settings()
-        dal_name = settings.dal_implementation
-        if dal_name not in DAL_REGISTRY:
-            raise ValueError(
-                f"Unrecognized DAL implementation: '{dal_name}'. "
-                f"Registered: {list(DAL_REGISTRY.keys())}"
-            )
-        _dal_instance = DAL_REGISTRY[dal_name]()
+        dal_path = os.environ.get("DAL_IMPLEMENTATION", _DEFAULT_DAL)
+        dal_class = _import_dal_class(dal_path)
+        _dal_instance = dal_class()
     return _dal_instance
 
 

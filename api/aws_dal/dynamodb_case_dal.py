@@ -1,9 +1,9 @@
+import os
 import uuid
 
 import boto3
 from botocore.exceptions import ClientError
 
-from app.config import get_settings
 from app.dal.case_dal import CaseDAL
 from app.models.case import CaseModel
 
@@ -12,7 +12,7 @@ class DynamoDBCaseDAL(CaseDAL):
     """CaseDAL implementation backed by AWS DynamoDB."""
 
     def __init__(self) -> None:
-        table_name = get_settings().dynamodb_table_name
+        table_name = os.environ.get("DYNAMODB_TABLE_NAME", "")
         if not table_name:
             raise RuntimeError(
                 "DYNAMODB_TABLE_NAME environment variable is not set or is empty. "

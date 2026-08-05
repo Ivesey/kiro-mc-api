@@ -1,90 +1,78 @@
-"""Unit tests for app/config.py and app/dependencies.py (DI configuration).
+"""Unit tests for app/dependencies.py (DAL dynamic import).
 
 Requirements: 2.1, 2.2, 2.5
 """
 
-from unittest.mock import patch, MagicMock
+import os
+from unittest.mock import patch
 
 import pytest
 
-from app.config import AppSettings, get_settings
-from app.dependencies import DAL_REGISTRY, get_dal, _reset_dal
+from app.dependencies import get_dal, _reset_dal, _import_dal_class
 from app.dal.case_dal import CaseDAL
+from app.dal.in_memory_case_dal import InMemoryCaseDAL
 
 
-class TestAppSettings:
-    """Tests for AppSettings defaults and factory."""
-
-    def test_default_dal_implementation_is_in_memory(self):
-        """Requirement 2.2: default dal_implementation is InMemoryCaseDAL."""
-        settings = get_settings()
-        assert settings.dal_implementation == "InMemoryCaseDAL"
-
-    def test_app_settings_direct_instantiation_default(self):
-        """AppSettings without arguments defaults to InMemoryCaseDAL."""
-        settings = AppSettings()
-        assert settings.dal_implementation == "InMemoryCaseDAL"
-
-
-class TestGetDal:
-    """Tests for the get_dal provider function."""
+class TestDefaultDal:
+    """Tests for default DAL behavior."""
 
     def setup_method(self):
-        """Reset the DAL singleton before each test."""
         _reset_dal()
 
     def teardown_method(self):
-        """Reset the DAL singleton after each test."""
         _reset_dal()
 
-    def test_invalid_dal_name_raises_value_error(self):
-        """Requirement 2.5: unrecognized DAL name raises ValueError."""
-        mock_settings = MagicMock()
-        mock_settings.dal_implementation = "NonExistentDAL"
+    def test_default_dal_is_in_memory(self):
+        """When DAL_IMPLEMENTATION is not set, get_dal returns InMemoryCaseDAL."""
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("DAL_IMPLEMENTATION", None)
+            dal = get_dal()
+            assert isinstance(dal, InMemoryCaseDAL)
 
-        with patch("app.dependencies.get_settings", return_value=mock_settings):
-            with pytest.raises(ValueError, match="Unrecognized DAL implementation"):
-                get_dal()
+    def test_explicit_in_memory_dal_path(self):
+        """Setting DAL_IMPLEMENTATION to the InMemoryCaseDAL path works."""
+        with patch.dict(os.environ, {"DAL_IMPLEMENTATION": "app.dal.in_memory_case_dal.InMemoryCaseDAL"}):
+            dal = get_dal()
+            assert isinstance(dal, InMemoryCaseDAL)
 
-    def test_custom_dal_registration(self):
-        """Requirement 2.1: a custom DAL class registered in DAL_REGISTRY
-        can be instantiated via get_dal()."""
-        import app.dependencies
 
-        class CustomDAL(CaseDAL):
-            """Minimal concrete DAL for testing custom registration."""
+class TestImportDalClass:
+    """Tests for _import_dal_class validation."""
 
-            def create_case(self, case):
-                pass
+    def test_invalid_path_no_dot_raises_value_error(self):
+        """A path without dots raises ValueError."""
+        with pytest.raises(ValueError, match="dotted path"):
+            _import_dal_class("NoDottedPath")
 
-            def update_case(self, case_id, case):
-                pass
+    def test_nonexistent_module_raises_value_error(self):
+        """A path with a non-existent module raises ValueError."""
+        with pytest.raises(ValueError, match="Could not import"):
+            _import_dal_class("nonexistent.module.SomeClass")
 
-            def delete_case(self, case_id):
-                pass
+    def test_nonexistent_class_raises_value_error(self):
+        """A valid module but non-existent class raises ValueError."""
+        with pytest.raises(ValueError, match="has no class"):
+            _import_dal_class("app.dal.in_memory_case_dal.NonExistentClass")
 
-            def get_all_cases(self):
-                return []
+    def test_non_casedal_subclass_raises_value_error(self):
+        """A class that is not a CaseDAL subclass raises ValueError."""
+        with pytest.raises(ValueError, match="not a CaseDAL subclass"):
+            _import_dal_class("app.models.case.CaseModel")
 
-            def get_case_by_id(self, case_id):
-                pass
 
-        # Temporarily add the custom DAL to the live registry
-        app.dependencies.DAL_REGISTRY["CustomDAL"] = CustomDAL
-        try:
-            mock_settings = MagicMock()
-            mock_settings.dal_implementation = "CustomDAL"
+class TestGetDalSingleton:
+    """Tests for get_dal singleton behavior."""
 
-            with patch("app.dependencies.get_settings", return_value=mock_settings):
-                dal = app.dependencies.get_dal()
-                assert isinstance(dal, CustomDAL)
-        finally:
-            # Clean up: remove the custom entry
-            del app.dependencies.DAL_REGISTRY["CustomDAL"]
+    def setup_method(self):
+        _reset_dal()
 
-    def test_default_settings_resolves_in_memory_dal(self):
-        """get_dal() with default settings returns an InMemoryCaseDAL instance."""
-        from app.dal.in_memory_case_dal import InMemoryCaseDAL
+    def teardown_method(self):
+        _reset_dal()
 
-        dal = get_dal()
-        assert isinstance(dal, InMemoryCaseDAL)
+    def test_get_dal_returns_same_instance(self):
+        """get_dal returns the same singleton instance on repeated calls."""
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("DAL_IMPLEMENTATION", None)
+            dal1 = get_dal()
+            dal2 = get_dal()
+            assert dal1 is dal2

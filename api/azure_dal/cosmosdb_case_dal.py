@@ -1,3 +1,4 @@
+import os
 import uuid
 
 from azure.cosmos import CosmosClient
@@ -6,7 +7,6 @@ from azure.cosmos.exceptions import (
     CosmosResourceNotFoundError,
 )
 
-from app.config import get_settings
 from app.dal.case_dal import CaseDAL
 from app.models.case import CaseModel
 
@@ -15,15 +15,19 @@ class CosmosDBCaseDAL(CaseDAL):
     """CaseDAL implementation backed by Azure Cosmos DB (NoSQL/SQL API)."""
 
     def __init__(self) -> None:
-        settings = get_settings()
-        if not settings.cosmosdb_endpoint or not settings.cosmosdb_key:
+        endpoint = os.environ.get("COSMOSDB_ENDPOINT", "")
+        key = os.environ.get("COSMOSDB_KEY", "")
+        if not endpoint or not key:
             raise RuntimeError(
-                "COSMOSDB_ENDPOINT and COSMOSDB_KEY must be set. "
+                "COSMOSDB_ENDPOINT and COSMOSDB_KEY environment variables must be set. "
                 "Cannot initialize CosmosDBCaseDAL without valid connection settings."
             )
-        client = CosmosClient(settings.cosmosdb_endpoint, settings.cosmosdb_key)
-        database = client.get_database_client(settings.cosmosdb_database_name)
-        self._container = database.get_container_client(settings.cosmosdb_container_name)
+        database_name = os.environ.get("COSMOSDB_DATABASE_NAME", "microdigitech-cases")
+        container_name = os.environ.get("COSMOSDB_CONTAINER_NAME", "cases")
+
+        client = CosmosClient(endpoint, key)
+        database = client.get_database_client(database_name)
+        self._container = database.get_container_client(container_name)
 
     def _serialize(self, case: CaseModel) -> dict:
         """Convert CaseModel to Cosmos DB item (id = case_id for partition key)."""

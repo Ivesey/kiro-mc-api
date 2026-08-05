@@ -46,7 +46,7 @@ module "compute" {
     COSMOSDB_KEY            = module.database.cosmosdb_primary_key
     COSMOSDB_DATABASE_NAME  = module.database.cosmosdb_database_name
     COSMOSDB_CONTAINER_NAME = module.database.cosmosdb_container_name
-    DAL_IMPLEMENTATION      = "CosmosDBCaseDAL"
+    DAL_IMPLEMENTATION      = "azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL"
   })
 
   tags = local.common_tags

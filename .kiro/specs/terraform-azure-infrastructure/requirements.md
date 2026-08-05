@@ -169,14 +169,14 @@ This specification defines the Terraform infrastructure-as-code requirements for
 1. THE CosmosDB_DAL SHALL be located at `api/azure_dal/cosmosdb_case_dal.py`, parallel to the existing `api/aws_dal/dynamodb_case_dal.py`
 2. THE CosmosDB_DAL SHALL implement all abstract methods defined in the `CaseDAL` interface (`create_case`, `update_case`, `delete_case`, `get_all_cases`, `get_case_by_id`)
 3. THE CosmosDB_DAL SHALL use the `azure-cosmos` SDK (CosmosDB NoSQL/SQL API) for all data operations
-4. THE CosmosDB_DAL SHALL read connection configuration from Pydantic BaseSettings, accepting `cosmosdb_endpoint`, `cosmosdb_key`, `cosmosdb_database_name`, and `cosmosdb_container_name` as settings
+4. THE CosmosDB_DAL SHALL read connection configuration directly from environment variables: `COSMOSDB_ENDPOINT`, `COSMOSDB_KEY`, `COSMOSDB_DATABASE_NAME` (default: `microdigitech-cases`), and `COSMOSDB_CONTAINER_NAME` (default: `cases`) via `os.environ`
 5. THE CosmosDB_DAL SHALL use `case_id` as both the partition key value and the item `id` field when storing items in the CosmosDB_Container
 6. WHEN `create_case` is called with a `case_id` that already exists in the CosmosDB_Container, THE CosmosDB_DAL SHALL raise a `ValueError` with a message indicating the duplicate case_id
 7. WHEN `update_case`, `delete_case`, or `get_case_by_id` is called with a `case_id` that does not exist in the CosmosDB_Container, THE CosmosDB_DAL SHALL raise a `KeyError` with the case_id value
 8. THE CosmosDB_DAL SHALL serialize CaseModel instances to JSON-compatible dictionaries and deserialize CosmosDB items back to CaseModel instances
 9. THE `api/azure_dal/__init__.py` module SHALL export the `CosmosDBCaseDAL` class so that importing from `azure_dal` provides access to the implementation
-10. THE application configuration in `api/app/config.py` SHALL accept `cosmosdb_endpoint`, `cosmosdb_key`, `cosmosdb_database_name`, and `cosmosdb_container_name` as optional settings so that the CosmosDB_DAL can be selected via the `dal_implementation` setting
-11. WHEN the `dal_implementation` setting is set to `CosmosDBCaseDAL`, THE application SHALL instantiate the CosmosDB_DAL for handling all case data operations
+10. THE `DAL_IMPLEMENTATION` environment variable SHALL be set to `azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL` in the Function App application settings, enabling `dependencies.py` to dynamically import and instantiate the CosmosDB_DAL at runtime
+11. WHEN the `DAL_IMPLEMENTATION` environment variable is set to `azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL`, THE application SHALL dynamically import and instantiate the CosmosDB_DAL for handling all case data operations
 
 ### Requirement 12: CosmosDB Terraform Module
 

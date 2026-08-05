@@ -6,7 +6,7 @@ This feature adds DynamoDB as a persistent backend for the support cases API. It
 
 1. **Infrastructure**: A Terraform-managed DynamoDB table and IAM policy within the existing `compute` module.
 2. **Application**: A `DynamoDBCaseDAL` class that implements the `CaseDAL` abstract base class using boto3.
-3. **Modularity**: Conditional registration in `dependencies.py` so that the DynamoDB DAL is only loaded when the `aws_dal` package is present on the Python path. AWS-specific dependencies (`boto3`) are isolated in `requirements-aws.txt`, keeping the core runtime free of AWS libraries.
+3. **Modularity**: Dynamic import in `dependencies.py` via the `DAL_IMPLEMENTATION` environment variable — the DynamoDB DAL is loaded only when the env var points to it. AWS-specific dependencies (`boto3`) are isolated in `requirements-aws.txt`, keeping the core runtime free of AWS libraries.
 
 The design preserves the existing DAL abstraction — the router layer is unchanged and the in-memory DAL continues to work for local development and testing.
 
@@ -19,9 +19,9 @@ graph TD
         D[dependencies.py]
     end
 
-    subgraph "DAL Registry"
-        D --> |"dal_implementation = InMemoryCaseDAL"| IM[InMemoryCaseDAL]
-        D --> |"dal_implementation = DynamoDBCaseDAL"| DDB[DynamoDBCaseDAL]
+    subgraph "DAL Resolution"
+        D --> |"DAL_IMPLEMENTATION=app.dal.in_memory_case_dal.InMemoryCaseDAL"| IM[InMemoryCaseDAL]
+        D --> |"DAL_IMPLEMENTATION=aws_dal.dynamodb_case_dal.DynamoDBCaseDAL"| DDB[DynamoDBCaseDAL]
     end
 
     subgraph "Infrastructure (Terraform)"
@@ -39,7 +39,7 @@ graph TD
 
 1. **DynamoDB table lives in the compute module** — The table is tightly coupled to the Lambda (same lifecycle, same IAM role), so co-locating avoids cross-module dependency wiring.
 2. **`aws_dal` is a sibling package to `app`** — Keeps AWS-specific dependencies out of the core application. The Lambda deployment ZIP includes both `app/` and `aws_dal/`, while local development only needs `app/`.
-3. **Conditional import via try/except** — Simple, no build flags needed. If `aws_dal` isn't on `sys.path`, the app runs with whatever DAL implementations are already registered.
+3. **Dynamic import via `DAL_IMPLEMENTATION` env var** — `dependencies.py` uses `importlib` to resolve a fully-qualified dotted path (e.g., `aws_dal.dynamodb_case_dal.DynamoDBCaseDAL`). No registry, no conditional imports — adding a new backend only requires setting the env var.
 4. **On-demand billing (PAY_PER_REQUEST)** — No capacity planning needed for a support cases workload with unpredictable traffic patterns.
 
 ## Components and Interfaces
@@ -69,6 +69,7 @@ The root module passes the table name into the Lambda environment variables:
 ```hcl
 environment_variables = merge(var.app_environment_variables, {
   DYNAMODB_TABLE_NAME = module.compute.cases_table_name
+  DAL_IMPLEMENTATION  = "aws_dal.dynamodb_case_dal.DynamoDBCaseDAL"
 })
 ```
 
@@ -81,7 +82,7 @@ The Lambda `depends_on` block is extended to include the DynamoDB IAM policy, en
 ```python
 class DynamoDBCaseDAL(CaseDAL):
     def __init__(self) -> None:
-        # Reads table name from AppSettings (DYNAMODB_TABLE_NAME env var)
+        # Reads table name from `os.environ.get('DYNAMODB_TABLE_NAME')`
         # Raises RuntimeError if not configured
         ...
 
@@ -111,34 +112,33 @@ class DynamoDBCaseDAL(CaseDAL):
 
 **Dependency management:** The `boto3` dependency is declared in `api/requirements-aws.txt` (not the core `requirements.txt`), ensuring non-AWS deployments don't pull in AWS libraries. Test-only dependencies (`moto`, `hypothesis`, `pytest`, `httpx`) are in `api/requirements-dev.txt`. The Lambda build script uses `requirements-aws.txt` to produce a deployment package with core + AWS deps only.
 
-### 3. Conditional Registration
+### 3. Dynamic DAL Resolution
 
 **File:** `api/app/dependencies.py`
 
 ```python
-# After existing InMemoryCaseDAL registration:
-try:
-    from aws_dal.dynamodb_case_dal import DynamoDBCaseDAL
-    DAL_REGISTRY["DynamoDBCaseDAL"] = DynamoDBCaseDAL
-except (ImportError, AttributeError):
-    pass
+# dependencies.py reads DAL_IMPLEMENTATION env var and uses importlib to resolve:
+import importlib
+import os
+from app.dal.case_dal import CaseDAL
+
+_DEFAULT_DAL = "app.dal.in_memory_case_dal.InMemoryCaseDAL"
+
+def get_dal() -> CaseDAL:
+    dal_path = os.environ.get("DAL_IMPLEMENTATION", _DEFAULT_DAL)
+    module_path, class_name = dal_path.rsplit(".", 1)
+    module = importlib.import_module(module_path)
+    dal_class = getattr(module, class_name)
+    return dal_class()
 ```
 
-The `except` catches both:
-- `ImportError` — `aws_dal` package not on path (local dev)
-- `AttributeError` — package exists but class not found (broken install)
+### 4. Environment Variable Configuration
 
-### 4. AppSettings Extension
+The DynamoDBCaseDAL reads its configuration directly from environment variables:
+- `DAL_IMPLEMENTATION` — Set to `aws_dal.dynamodb_case_dal.DynamoDBCaseDAL` (read by dependencies.py)
+- `DYNAMODB_TABLE_NAME` — The DynamoDB table name (read by DynamoDBCaseDAL.__init__)
 
-**File:** `api/app/config.py`
-
-```python
-class AppSettings(BaseSettings):
-    dal_implementation: str = "InMemoryCaseDAL"
-    dynamodb_table_name: str = ""  # Populated from DYNAMODB_TABLE_NAME env var
-```
-
-The `DynamoDBCaseDAL.__init__` reads `get_settings().dynamodb_table_name` and raises `RuntimeError` if empty.
+There is no AppSettings class or config.py. Each DAL owns its own configuration via os.environ.
 
 ## Data Models
 
@@ -204,8 +204,8 @@ The following properties apply to the DynamoDB DAL implementation (Requirement 3
 | Duplicate `case_id` on create | `ValueError` | DynamoDB condition expression failure → caught and raised as ValueError |
 | Non-existent `case_id` on get/update/delete | `KeyError` | DynamoDB missing item / condition failure → caught and raised as KeyError |
 | boto3 `ClientError` (connectivity, throttling, service error) | Propagated as-is | No swallowing — caller (router) handles HTTP error mapping |
-| `aws_dal` package not importable | No exception | Graceful skip in `dependencies.py` — in-memory DAL remains available |
-| `DynamoDBCaseDAL` class not resolvable from `aws_dal` | No exception | `AttributeError` caught — registry unchanged |
+| `DAL_IMPLEMENTATION` env var points to non-existent module | `ValueError` | `dependencies.py` raises with descriptive import error message |
+| `DAL_IMPLEMENTATION` env var points to non-CaseDAL class | `ValueError` | `dependencies.py` validates the class is a CaseDAL subclass |
 
 **DynamoDB condition expression mapping:**
 
@@ -256,11 +256,11 @@ Each correctness property maps to a single property-based test function.
 | Configuration | Missing `DYNAMODB_TABLE_NAME` raises RuntimeError |
 | Configuration | Valid `DYNAMODB_TABLE_NAME` initializes successfully |
 | Error propagation | boto3 `ClientError` propagates without being swallowed |
-| Conditional import (success) | `DynamoDBCaseDAL` appears in `DAL_REGISTRY` |
-| Conditional import (failure) | `DAL_REGISTRY` unchanged, no exception |
-| Conditional import (AttributeError) | Package importable but class missing — graceful |
-| `get_dal` integration | Returns `DynamoDBCaseDAL` instance when configured and importable |
-| `get_dal` error | Raises `ValueError` when configured but not importable |
+| Dynamic import (valid path) | `_import_dal_class` resolves and returns the DAL class |
+| Dynamic import (invalid module) | `_import_dal_class` raises `ValueError` with import error |
+| Dynamic import (missing class) | `_import_dal_class` raises `ValueError` with attribute error |
+| Dynamic import (non-CaseDAL) | `_import_dal_class` raises `ValueError` with subclass error |
+| `get_dal` with env var | Returns correct DAL instance when `DAL_IMPLEMENTATION` set |
 
 ### Infrastructure Tests
 

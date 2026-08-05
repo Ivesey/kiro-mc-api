@@ -1,5 +1,6 @@
 """Unit tests for CosmosDBCaseDAL implementation."""
 
+import os
 import uuid
 from unittest.mock import MagicMock, patch
 
@@ -27,12 +28,6 @@ def _make_case(**overrides) -> CaseModel:
 
 def _build_dal():
     """Create a CosmosDBCaseDAL with mocked dependencies, return (dal, mock_container)."""
-    mock_settings = MagicMock()
-    mock_settings.cosmosdb_endpoint = "https://test.documents.azure.com:443/"
-    mock_settings.cosmosdb_key = "dGVzdGtleQ=="
-    mock_settings.cosmosdb_database_name = "test-db"
-    mock_settings.cosmosdb_container_name = "test-container"
-
     mock_container = MagicMock()
     mock_database = MagicMock()
     mock_database.get_container_client.return_value = mock_container
@@ -40,9 +35,14 @@ def _build_dal():
     mock_client_instance = MagicMock()
     mock_client_instance.get_database_client.return_value = mock_database
 
-    with patch(
-        "azure_dal.cosmosdb_case_dal.get_settings", return_value=mock_settings
-    ), patch(
+    env_vars = {
+        "COSMOSDB_ENDPOINT": "https://test.documents.azure.com:443/",
+        "COSMOSDB_KEY": "dGVzdGtleQ==",
+        "COSMOSDB_DATABASE_NAME": "test-db",
+        "COSMOSDB_CONTAINER_NAME": "test-container",
+    }
+
+    with patch.dict(os.environ, env_vars), patch(
         "azure_dal.cosmosdb_case_dal.CosmosClient", return_value=mock_client_instance
     ):
         from azure_dal.cosmosdb_case_dal import CosmosDBCaseDAL
@@ -56,28 +56,16 @@ class TestInitialization:
     """Tests for CosmosDBCaseDAL initialization."""
 
     def test_missing_endpoint_raises_runtime_error(self):
-        """RuntimeError raised when cosmosdb_endpoint is empty."""
-        mock_settings = MagicMock()
-        mock_settings.cosmosdb_endpoint = ""
-        mock_settings.cosmosdb_key = "dGVzdGtleQ=="
-
-        with patch(
-            "azure_dal.cosmosdb_case_dal.get_settings", return_value=mock_settings
-        ):
+        """RuntimeError raised when COSMOSDB_ENDPOINT is empty."""
+        with patch.dict(os.environ, {"COSMOSDB_ENDPOINT": "", "COSMOSDB_KEY": "dGVzdGtleQ=="}):
             from azure_dal.cosmosdb_case_dal import CosmosDBCaseDAL
 
             with pytest.raises(RuntimeError, match="COSMOSDB_ENDPOINT"):
                 CosmosDBCaseDAL()
 
     def test_missing_key_raises_runtime_error(self):
-        """RuntimeError raised when cosmosdb_key is empty."""
-        mock_settings = MagicMock()
-        mock_settings.cosmosdb_endpoint = "https://test.documents.azure.com:443/"
-        mock_settings.cosmosdb_key = ""
-
-        with patch(
-            "azure_dal.cosmosdb_case_dal.get_settings", return_value=mock_settings
-        ):
+        """RuntimeError raised when COSMOSDB_KEY is empty."""
+        with patch.dict(os.environ, {"COSMOSDB_ENDPOINT": "https://test.documents.azure.com:443/", "COSMOSDB_KEY": ""}):
             from azure_dal.cosmosdb_case_dal import CosmosDBCaseDAL
 
             with pytest.raises(RuntimeError, match="COSMOSDB_KEY"):

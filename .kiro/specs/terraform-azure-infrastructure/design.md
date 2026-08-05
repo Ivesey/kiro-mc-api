@@ -259,7 +259,7 @@ variable "deployment_package_path" {
 
 variable "app_environment_variables" {
   type        = map(string)
-  description = "Environment variables passed to the Function App for Pydantic BaseSettings"
+  description = "Environment variables passed to the Function App for application configuration"
   default     = {}
 }
 
@@ -353,10 +353,12 @@ The `CosmosDBCaseDAL` class implements the existing `CaseDAL` abstract interface
 
 ```python
 # api/azure_dal/cosmosdb_case_dal.py
-from azure.cosmos import CosmosClient, PartitionKey
+import os
+import uuid
+
+from azure.cosmos import CosmosClient
 from azure.cosmos.exceptions import CosmosResourceExistsError, CosmosResourceNotFoundError
 
-from app.config import get_settings
 from app.dal.case_dal import CaseDAL
 from app.models.case import CaseModel
 
@@ -365,14 +367,18 @@ class CosmosDBCaseDAL(CaseDAL):
     """CaseDAL implementation backed by Azure Cosmos DB (NoSQL/SQL API)."""
 
     def __init__(self) -> None:
-        settings = get_settings()
-        if not settings.cosmosdb_endpoint or not settings.cosmosdb_key:
+        endpoint = os.environ.get("COSMOSDB_ENDPOINT", "")
+        key = os.environ.get("COSMOSDB_KEY", "")
+        if not endpoint or not key:
             raise RuntimeError(
-                "COSMOSDB_ENDPOINT and COSMOSDB_KEY must be set."
+                "COSMOSDB_ENDPOINT and COSMOSDB_KEY environment variables must be set."
             )
-        client = CosmosClient(settings.cosmosdb_endpoint, settings.cosmosdb_key)
-        database = client.get_database_client(settings.cosmosdb_database_name)
-        self._container = database.get_container_client(settings.cosmosdb_container_name)
+        database_name = os.environ.get("COSMOSDB_DATABASE_NAME", "microdigitech-cases")
+        container_name = os.environ.get("COSMOSDB_CONTAINER_NAME", "cases")
+
+        client = CosmosClient(endpoint, key)
+        database = client.get_database_client(database_name)
+        self._container = database.get_container_client(container_name)
 
     def _serialize(self, case: CaseModel) -> dict:
         """Convert CaseModel to Cosmos DB item (id = case_id for partition key)."""
@@ -405,22 +411,30 @@ class CosmosDBCaseDAL(CaseDAL):
 **Key Design Points:**
 - `id` field is set to `case_id` string — required by Cosmos DB as the unique item identifier
 - `case_id` is also the partition key value, enabling point reads by partition key
+- reads config directly from environment variables (`COSMOSDB_ENDPOINT`, `COSMOSDB_KEY`, `COSMOSDB_DATABASE_NAME`, `COSMOSDB_CONTAINER_NAME`) via `os.environ`
 - `CosmosResourceExistsError` maps to `ValueError` in `create_case` (duplicate case_id)
 - `CosmosResourceNotFoundError` maps to `KeyError` in `update_case`, `delete_case`, `get_case_by_id`
 - `get_all_cases` uses `query_items` with `SELECT * FROM c` and cross-partition query enabled
 
-### Configuration Extension
+### Environment Variable Configuration
 
-```python
-# Addition to api/app/config.py
-class AppSettings(BaseSettings):
-    dal_implementation: str = "InMemoryCaseDAL"
-    dynamodb_table_name: str = ""
-    # Azure Cosmos DB settings (optional, used when dal_implementation = "CosmosDBCaseDAL")
-    cosmosdb_endpoint: str = ""
-    cosmosdb_key: str = ""
-    cosmosdb_database_name: str = "microdigitech-cases"
-    cosmosdb_container_name: str = "cases"
+The CosmosDBCaseDAL reads its configuration directly from environment variables:
+- `DAL_IMPLEMENTATION` — Set to `azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL` (read by dependencies.py)
+- `COSMOSDB_ENDPOINT` — Cosmos DB account endpoint URL
+- `COSMOSDB_KEY` — Cosmos DB primary key
+- `COSMOSDB_DATABASE_NAME` — Database name (default: `microdigitech-cases`)
+- `COSMOSDB_CONTAINER_NAME` — Container name (default: `cases`)
+
+There is no AppSettings class or config.py. Each DAL owns its own configuration via `os.environ`. The Terraform compute module passes these as Function App application settings:
+
+```hcl
+app_settings = merge(var.app_environment_variables, {
+  COSMOSDB_ENDPOINT       = module.database.cosmosdb_endpoint
+  COSMOSDB_KEY            = module.database.cosmosdb_primary_key
+  COSMOSDB_DATABASE_NAME  = module.database.cosmosdb_database_name
+  COSMOSDB_CONTAINER_NAME = module.database.cosmosdb_container_name
+  DAL_IMPLEMENTATION      = "azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL"
+})
 ```
 
 ### Build Script Design

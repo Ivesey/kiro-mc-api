@@ -1,7 +1,6 @@
 """Unit tests for DynamoDBCaseDAL implementation."""
 
 import os
-import sys
 import uuid
 
 import boto3
@@ -45,11 +44,8 @@ class TestMissingTableName:
     """Tests for missing DYNAMODB_TABLE_NAME configuration."""
 
     def test_missing_table_name_raises_runtime_error(self):
-        """RuntimeError raised when dynamodb_table_name is empty."""
-        mock_settings = MagicMock()
-        mock_settings.dynamodb_table_name = ""
-
-        with patch("aws_dal.dynamodb_case_dal.get_settings", return_value=mock_settings):
+        """RuntimeError raised when DYNAMODB_TABLE_NAME is empty."""
+        with patch.dict(os.environ, {"DYNAMODB_TABLE_NAME": ""}):
             with pytest.raises(RuntimeError, match="DYNAMODB_TABLE_NAME"):
                 DynamoDBCaseDAL()
 
@@ -60,18 +56,11 @@ class TestValidInitialization:
     @mock_aws
     def test_valid_table_name_initializes_successfully(self):
         """DAL initializes when a valid table name is configured."""
-        os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
-        _create_mock_table()
-
-        mock_settings = MagicMock()
-        mock_settings.dynamodb_table_name = TABLE_NAME
-
-        with patch("aws_dal.dynamodb_case_dal.get_settings", return_value=mock_settings):
+        with patch.dict(os.environ, {"DYNAMODB_TABLE_NAME": TABLE_NAME, "AWS_DEFAULT_REGION": "us-east-1"}):
+            _create_mock_table()
             dal = DynamoDBCaseDAL()
             assert dal._table is not None
             assert dal._table.table_name == TABLE_NAME
-
-        os.environ.pop("AWS_DEFAULT_REGION", None)
 
 
 class TestClientErrorPropagation:
@@ -80,13 +69,8 @@ class TestClientErrorPropagation:
     @mock_aws
     def test_client_error_propagates_on_create(self):
         """Non-ConditionalCheckFailed ClientError propagates from create_case."""
-        os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
-        _create_mock_table()
-
-        mock_settings = MagicMock()
-        mock_settings.dynamodb_table_name = TABLE_NAME
-
-        with patch("aws_dal.dynamodb_case_dal.get_settings", return_value=mock_settings):
+        with patch.dict(os.environ, {"DYNAMODB_TABLE_NAME": TABLE_NAME, "AWS_DEFAULT_REGION": "us-east-1"}):
+            _create_mock_table()
             dal = DynamoDBCaseDAL()
 
         error_response = {
@@ -101,18 +85,11 @@ class TestClientErrorPropagation:
 
         assert exc_info.value.response["Error"]["Code"] == "InternalServerError"
 
-        os.environ.pop("AWS_DEFAULT_REGION", None)
-
     @mock_aws
     def test_client_error_propagates_on_get(self):
         """Non-ConditionalCheckFailed ClientError propagates from get_case_by_id."""
-        os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
-        _create_mock_table()
-
-        mock_settings = MagicMock()
-        mock_settings.dynamodb_table_name = TABLE_NAME
-
-        with patch("aws_dal.dynamodb_case_dal.get_settings", return_value=mock_settings):
+        with patch.dict(os.environ, {"DYNAMODB_TABLE_NAME": TABLE_NAME, "AWS_DEFAULT_REGION": "us-east-1"}):
+            _create_mock_table()
             dal = DynamoDBCaseDAL()
 
         error_response = {
@@ -126,18 +103,11 @@ class TestClientErrorPropagation:
 
         assert exc_info.value.response["Error"]["Code"] == "InternalServerError"
 
-        os.environ.pop("AWS_DEFAULT_REGION", None)
-
     @mock_aws
     def test_client_error_propagates_on_delete(self):
         """Non-ConditionalCheckFailed ClientError propagates from delete_case."""
-        os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
-        _create_mock_table()
-
-        mock_settings = MagicMock()
-        mock_settings.dynamodb_table_name = TABLE_NAME
-
-        with patch("aws_dal.dynamodb_case_dal.get_settings", return_value=mock_settings):
+        with patch.dict(os.environ, {"DYNAMODB_TABLE_NAME": TABLE_NAME, "AWS_DEFAULT_REGION": "us-east-1"}):
+            _create_mock_table()
             dal = DynamoDBCaseDAL()
 
         error_response = {
@@ -150,5 +120,3 @@ class TestClientErrorPropagation:
             dal.delete_case(uuid.uuid4())
 
         assert exc_info.value.response["Error"]["Code"] == "InternalServerError"
-
-        os.environ.pop("AWS_DEFAULT_REGION", None)

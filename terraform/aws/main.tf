@@ -61,6 +61,7 @@ module "compute" {
   deployment_package_path = var.deployment_package_path
   environment_variables = merge(var.app_environment_variables, {
     DYNAMODB_TABLE_NAME = module.compute.cases_table_name
+    DAL_IMPLEMENTATION  = "aws_dal.dynamodb_case_dal.DynamoDBCaseDAL"
   })
   tags                    = local.common_tags
 }

@@ -91,14 +91,16 @@ This plan implements the Azure infrastructure-as-code deployment for the MicroDi
   - [x] 8.1 Create `api/azure_dal/` module with CosmosDB DAL implementation
     - Create `api/azure_dal/__init__.py` exporting `CosmosDBCaseDAL`
     - Create `api/azure_dal/cosmosdb_case_dal.py` implementing all `CaseDAL` abstract methods (`create_case`, `update_case`, `delete_case`, `get_all_cases`, `get_case_by_id`)
-    - Use `azure-cosmos` SDK, read config from Pydantic BaseSettings (`cosmosdb_endpoint`, `cosmosdb_key`, `cosmosdb_database_name`, `cosmosdb_container_name`)
+    - Use `azure-cosmos` SDK, read config directly from `os.environ` (`COSMOSDB_ENDPOINT`, `COSMOSDB_KEY`, `COSMOSDB_DATABASE_NAME`, `COSMOSDB_CONTAINER_NAME`)
     - Map `CosmosResourceExistsError` → `ValueError` in `create_case`
     - Map `CosmosResourceNotFoundError` → `KeyError` in `update_case`, `delete_case`, `get_case_by_id`
     - Use `case_id` as both partition key and `id` field
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9_
 
-  - [x] 8.2 Extend `api/app/config.py` with CosmosDB settings
-    - Add `cosmosdb_endpoint: str = ""`, `cosmosdb_key: str = ""`, `cosmosdb_database_name: str = "microdigitech-cases"`, `cosmosdb_container_name: str = "cases"` to `AppSettings`
+  - [x] 8.2 Configure CosmosDB environment variables in Function App settings
+    - CosmosDB DAL reads connection config directly from `os.environ` (`COSMOSDB_ENDPOINT`, `COSMOSDB_KEY`, `COSMOSDB_DATABASE_NAME`, `COSMOSDB_CONTAINER_NAME`) — no AppSettings class or config.py
+    - Terraform passes these values via `app_settings` in the compute module (merged with `var.app_environment_variables`)
+    - `DAL_IMPLEMENTATION` is set to `azure_dal.cosmosdb_case_dal.CosmosDBCaseDAL` in the same app_settings block
     - _Requirements: 11.10, 11.4_
 
   - [x] 8.3 Create `api/requirements-azure.txt` with Azure SDK dependencies
